@@ -17,12 +17,12 @@
 import webapp2
 
 form="""
-<form action="https://www.youtube.com/results">
+<form action="/testform">
 	<h1>
 		Le me search for you.
 	</h1>
 
-	<input name="search_query">
+	<input name="q">
 	<input type="Submit">
 
 </form>
@@ -34,10 +34,19 @@ form="""
 """
 
 class MainHandler(webapp2.RequestHandler):
-    def get(self):
-    	self.response.headers['Content-Type']='Text/html' 
-        self.response.write(form)
+   def get(self):
+    	#self.response.headers['Content-Type']='Text/html' 
+        self.response.out.write(form)
+
+class TestHandler(webapp2.RequestHandler):
+   def get(self):
+    	#self.response.headers['Content-Type']='Text/plain' 
+   		#self.response.out.write(self.request)
+    	q=self.request.get("q")
+        self.response.out.write(q)
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler),('/testform',TestHandler)
 ], debug=True)
+
+
