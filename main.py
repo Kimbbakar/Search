@@ -35,15 +35,16 @@ form="""
 
 class MainHandler(webapp2.RequestHandler):
    def get(self):
+      self.response.out.write(form)
     	#self.response.headers['Content-Type']='Text/html' 
-        self.response.out.write(form)
 
 class TestHandler(webapp2.RequestHandler):
    def get(self):
+      q=self.request.get("q")
+      self.response.out.write(q)
     	#self.response.headers['Content-Type']='Text/plain' 
    		#self.response.out.write(self.request)
-    	q=self.request.get("q")
-        self.response.out.write(q)
+
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),('/testform',TestHandler)
