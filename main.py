@@ -17,7 +17,7 @@
 import webapp2
 
 form="""
-<form action="/testform">
+<form method="post" >
 	<h1>
 		Le me search for you.
 	</h1>
@@ -38,16 +38,8 @@ class MainHandler(webapp2.RequestHandler):
       self.response.out.write(form)
     	#self.response.headers['Content-Type']='Text/html' 
 
-class TestHandler(webapp2.RequestHandler):
-   def get(self):
-      q=self.request.get("q")
-      self.response.out.write(q)
-    	#self.response.headers['Content-Type']='Text/plain' 
-   		#self.response.out.write(self.request)
-
-
 app = webapp2.WSGIApplication([
-    ('/', MainHandler),('/testform',TestHandler)
+    ('/', MainHandler)
 ], debug=True)
 
 
